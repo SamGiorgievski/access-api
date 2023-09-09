@@ -2,6 +2,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { getUsers } from "../database.js";
 
 const app = express();
 
@@ -10,35 +11,17 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-let users = {
-  1: {
-    id: '1',
-    username: 'Robin Wieruch',
-  },
-  2: {
-    id: '2',
-    username: 'Dave Davids',
-  },
-};
 
-let messages = {
-  1: {
-    id: '1',
-    text: 'Hello World',
-    userId: '1',
-  },
-  2: {
-    id: '2',
-    text: 'By World',
-    userId: '2',
-  },
-};
+// Get all users
+app.get('/users', async (req, res) => {
+  
+  const userList = await getUsers()
+  res.send(userList)
 
-
-app.get('/users', (req, res) => {
-  return res.send(Object.values(users));
 });
 
+
+// Get user by ID
 app.get('/users/:userId', (req, res) => {
   return res.send(users[req.params.userId]);
 });

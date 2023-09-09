@@ -10,7 +10,7 @@ const pool = new Pool({
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  port: process.env.PORT,
+  port: 5432,
 });
 
 // immediately invoked function expression (IIFE) 
@@ -28,3 +28,14 @@ const pool = new Pool({
     client.release();
   }
 })();
+
+export async function getUsers() {
+
+  try {
+    const result = await pool.query('SELECT * FROM users');
+    return result.rows;
+  } catch (error) {
+    console.error('Error executing SQL query:', error);
+    throw error; 
+  }
+}
