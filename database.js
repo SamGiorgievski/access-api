@@ -32,10 +32,29 @@ const pool = new Pool({
 export async function getUsers() {
 
   try {
-    const result = await pool.query('SELECT * FROM users');
+    const result = await pool.query(`
+    SELECT * 
+    FROM users`);
     return result.rows;
   } catch (error) {
     console.error('Error executing SQL query:', error);
     throw error; 
   }
 }
+
+export async function getUser(id) {
+
+  try {
+    const result = await pool.query(`
+    SELECT * 
+    FROM users 
+    WHERE id=${id}`);
+    return result.rows;
+  } catch (error) {
+    console.error('Error executing SQL query:', error);
+    throw error; 
+  }
+}
+
+const test = await getUser(2)
+console.log(test);
