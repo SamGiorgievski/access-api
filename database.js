@@ -56,5 +56,24 @@ export async function getUser(id) {
   }
 }
 
-const test = await getUser(2)
-console.log(test);
+
+export async function createUser(values) {
+
+  const { first_name, last_name, email, is_verified, image_url, description } = values;
+
+  try {
+    const result = await pool.query(
+      `INSERT INTO users (first_name, last_name, email, is_verified, image_url, description)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING *;`,
+      [first_name, last_name, email, is_verified, image_url, description]
+    );
+
+    // Return the created user
+    return result.rows[0];
+  } catch (error) {
+    console.error('Error executing SQL query:', error);
+    throw error;
+  }
+
+}

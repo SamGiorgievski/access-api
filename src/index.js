@@ -2,7 +2,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { getUsers } from "../database.js";
+import { getUsers, getUser, createUser } from "../database.js";
 
 const app = express();
 
@@ -22,34 +22,34 @@ app.get('/users', async (req, res) => {
 
 
 // Get user by ID
-app.get('/users/:userId', (req, res) => {
-  return res.send(users[req.params.userId]);
-});
+app.get('/users/:userId', async (req, res) => {
 
-app.get('/messages', (req, res) => {
-  return res.send(Object.values(messages));
-});
+const id = req.params.userId;
+const user = await getUser(id);
+res.send(user);
 
-app.get('/messages/:messageId', (req, res) => {
-  return res.send(messages[req.params.messageId]);
 });
 
 
-app.post('/users', (req, res) => {
-  return res.send('POST HTTP method on user resource');
+
+
+app.post('/users', async (req, res) => {
+
+  const values = req.body;
+
+  console.log(req.body);
+
+  try {
+    const createdUser = await createUser(values);
+    res.status(201).json(createdUser);
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
 });
 
-app.post('/messages', (req, res) => {
-  const id = uuidv4();
-  const message = {
-    id,
-    text: req.body.text,
-  };
 
-  messages[id] = message;
-
-  return res.send(message);
-});
 
 app.put('/users/:userId', (req, res) => {
   return res.send(
