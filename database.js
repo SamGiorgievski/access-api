@@ -29,6 +29,8 @@ const pool = new Pool({
   }
 })();
 
+
+// Get all users
 export async function getUsers() {
 
   try {
@@ -42,6 +44,8 @@ export async function getUsers() {
   }
 }
 
+// QUERIES
+// Get user by id
 export async function getUser(id) {
 
   try {
@@ -56,7 +60,7 @@ export async function getUser(id) {
   }
 }
 
-
+// Create user
 export async function createUser(values) {
 
   const { first_name, last_name, email, is_verified, image_url, description } = values;
@@ -77,3 +81,26 @@ export async function createUser(values) {
   }
 
 }
+
+// Update user
+export async function updateUser(userId, updatedUserData) {
+  const { first_name, last_name, email, is_verified, image_url, description } = updatedUserData;
+
+  try {
+    const result = await pool.query(
+      `UPDATE users 
+       SET first_name = $1, last_name = $2, email = $3, is_verified = $4, image_url = $5, description = $6
+       WHERE id = $7
+       RETURNING *;`,
+      [first_name, last_name, email, is_verified, image_url, description, userId]
+    );
+
+    return result.rows[0];
+  } catch (error) {
+    console.error('Error executing SQL query:', error);
+    throw error;
+  }
+}
+
+
+// Delete user
