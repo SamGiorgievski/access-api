@@ -2,7 +2,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { getUsers, getUser, createUser, updateUser } from "../database.js";
+import { getUsers, getUser, createUser, updateUser, deleteUser } from "../database.js";
 
 const app = express();
 app.use(express.json());
@@ -60,10 +60,16 @@ app.put('/users/:userId', async (req, res) => {
 
 // Delete user
 
-app.delete('/users/:userId', (req, res) => {
-  return res.send(
-    `DELETE HTTP method on user/${req.params.userId} resource`,
-  );
+app.delete('/users/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const deletedUser = await deleteUser(userId);
+    res.json({ message: 'User deleted', user: deletedUser });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 // Listener

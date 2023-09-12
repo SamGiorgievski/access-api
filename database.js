@@ -104,3 +104,17 @@ export async function updateUser(userId, updatedUserData) {
 
 
 // Delete user
+export async function deleteUser(userId) {
+  try {
+    const result = await pool.query(
+      `DELETE FROM users 
+       WHERE id = $1
+       RETURNING *;`,
+      [userId]
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error('Error executing SQL query:', error);
+    throw error;
+  }
+}
