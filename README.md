@@ -24,13 +24,13 @@ This project is a basic API that serves as a portfolio piece to demonstrate my p
 
 To get a copy of the project up and running on your local machine, follow these steps:
 
-1. Clone the repository: git clone https://github.com/SamGiorgievski/basic-api.git
-2. Navigate to the project directory: cd basic-api
-3. Install project dependencies: npm install
-4. Database Setup: psql -U your_username -a -f users.sql
+1. Clone the repository: `git clone https://github.com/SamGiorgievski/basic-api.git`
+2. Navigate to the project directory: `cd basic-api`
+3. Install project dependencies: `npm install`
+4. Database Setup: `psql -U your_username -a -f users.sql`
    - Note: use your own personal username instead of "your_username"
 6. Configure environment variables by creating a `.env` file and providing the necessary values. Refer to `.env.example` for required variables.
-7. Start the API server: npm start
+7. Start the API server: `npm start`
 8. You can now access the API at `http://localhost:3001` (or as configured in your environment).
 
 ## API Endpoints
