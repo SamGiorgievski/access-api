@@ -4,7 +4,7 @@ Welcome to my Access API project! This project demonstrates my skills as a junio
 
 ## Project Overview
 
-This project is a Access API that serves as a portfolio piece to demonstrate my proficiency in the following areas:
+This project is an Access API that serves as a portfolio piece to demonstrate my proficiency in the following areas:
 
 - Creating a RESTful API using Node.js and Express.
 - Setting up and configuring a PostgreSQL database.
