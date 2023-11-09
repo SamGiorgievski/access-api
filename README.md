@@ -1,10 +1,10 @@
-# Basic API - Full Stack Developer Portfolio Project
+# Access API - Full Stack Developer Portfolio Project
 
-Welcome to my Basic API project! This project demonstrates my skills as a junior full stack developer, showcasing my ability to build a RESTful API from scratch and effectively use tools like Postman for testing.
+Welcome to my Access API project! This project demonstrates my skills as a junior full stack developer, showcasing my ability to build a RESTful API from scratch and effectively use tools like Postman for testing.
 
 ## Project Overview
 
-This project is a basic API that serves as a portfolio piece to demonstrate my proficiency in the following areas:
+This project is a Access API that serves as a portfolio piece to demonstrate my proficiency in the following areas:
 
 - Creating a RESTful API using Node.js and Express.
 - Setting up and configuring a PostgreSQL database.
